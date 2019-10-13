@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="products_Subcatigories">
+        <item>Mobiles</item>
+        <item>Headphones</item>
+        <item>Chargers</item>
+        <item>Covers</item>
+        <item>Protectors</item>
+
+
+
+
+    </array>
+</resources>

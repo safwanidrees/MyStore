@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+
+  android:layout_margin="5dp"
+    android:layout_marginBottom="4dp"
+
+
+
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+       android:layout_gravity="center">
+
+        <ImageView
+android:paddingTop="8dp"
+            android:id="@+id/view_img"
+
+            android:layout_width="140dp"
+            android:layout_height="150dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shirt"/>
+        <TextView
+            android:id="@+id/view_brand"
+            android:textColor="#2d2d2d"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:text="Levis"/>
+        <TextView
+            android:id="@+id/view_desc"
+            android:textColor="#2d2d2d"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="sans-serif"
+            android:text="New Stylish Casual Shirt For Mens"
+            android:maxLines="2"/>
+        <TextView
+            android:id="@+id/view_Rating"
+            android:textColor="#2d2d2d"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:text="4"/>
+        <TextView
+            android:id="@+id/view_price"
+            android:textColor="#2d2d2d"
+            android:textSize="13sp"
+            android:gravity="center"
+            android:fontFamily="sans-serif-black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:text="Rs.900"/>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Admin.AdminActivity"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:background="#ffffff"
+    >
+    <ProgressBar
+        android:id="@+id/progess"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+
+
+        android:entries="@array/products_Subcatigories"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner_values"
+
+        />
+    <EditText
+        android:id="@+id/product_brand"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="55dp"
+        android:gravity="center"
+
+        android:background="@drawable/pro"
+        android:hint="Product Brand"
+
+        />
+    <EditText
+        android:id="@+id/product_Decription"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+
+        android:layout_height="55dp"
+android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/pro"
+        android:hint=" Product Description"
+        android:gravity="center"
+
+        />
+    <EditText
+        android:id="@+id/product_price"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+
+        android:gravity="center"
+        android:background="@drawable/pro"        android:hint="Product Price"
+
+        />
+    <EditText
+        android:id="@+id/product_rating"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="55dp"
+        android:paddingLeft="10dp"
+        android:gravity="center"
+
+        android:background="@drawable/pro"
+        android:hint="Product Rating"
+
+        />
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image_text"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_gravity="center"
+            android:text="Insert Image : "
+
+            />
+        <ImageButton
+            android:id="@+id/upload_image"
+
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/add"
+            android:background="#00000000"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/product_upload"
+        android:layout_width="300dp"
+        android:layout_height="61dp"
+       android:gravity="center"
+android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/sign_up"
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:textColor="#FFFFFF"
+        android:text="POST PRODUCT"
+        android:fitsSystemWindows="true"/>
+
+    <ImageView
+
+android:id="@+id/show_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        />
+
+
+
+</LinearLayout>
