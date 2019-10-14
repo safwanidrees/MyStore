@@ -53,5 +53,13 @@ android:layout_centerInParent="true"
         android:textStyle="normal">
 
     </Button>
+    <ImageButton
+        android:id="@+id/ima"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/profile"
+       android:layout_alignBottom="@+id/login"
+        android:background="@color/fui_transparent"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

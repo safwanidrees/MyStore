@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
+import com.example.mystore.MainActivity;
+import com.example.mystore.MobileProducts;
 import com.example.mystore.Products;
 import com.example.mystore.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -33,6 +35,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
@@ -52,6 +55,8 @@ public class AdminActivity extends AppCompatActivity {
     private Button uploadproduct;
     private ProgressBar mProgressBar;
     private String child;
+    private int buttonState = 1;
+
 
 
     @Override
@@ -64,7 +69,7 @@ public class AdminActivity extends AppCompatActivity {
         product_price = findViewById(R.id.product_price);
         product_rating = findViewById(R.id.product_rating);
         uploadproduct = findViewById(R.id.product_upload);
-
+mProgressBar=findViewById(R.id.progress_bar);
         // spinnner is used to select categories
         product_spinner = findViewById(R.id.spinner);
 
@@ -116,10 +121,17 @@ public class AdminActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
+//                    uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
                     Toast.makeText(AdminActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
+//                    uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
                     uploadFile();
+
                 }
+//                buttonState++;
+
             }
         });
 
@@ -197,17 +209,26 @@ public class AdminActivity extends AppCompatActivity {
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(AdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mProgressBar.setProgress((int) progress);
+uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
+
+                        }
+
+
                     });
-//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                        @Override
-//                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-//                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-//                            mProgressBar.setProgress((int) progress);
-//                        }
-//                    });
+
+
+
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
+
     }
 
 

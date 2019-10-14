@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.mystore.Admin.AdminActivity;
 
@@ -24,7 +25,7 @@ Button login;
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(MainActivity.this, AdminActivity.class);
+                Intent i= new Intent(MainActivity.this, Home.class);
                 startActivity(i);
             }
         });
@@ -35,7 +36,14 @@ Button login;
                 startActivity(i);
             }
         });
-
+        ImageButton imageButton=findViewById(R.id.ima);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(MainActivity.this, AdminActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override
