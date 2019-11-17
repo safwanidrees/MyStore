@@ -8,24 +8,38 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class Home extends AppCompatActivity {
     ImageButton back;
     RecyclerView mRecyclerView;
     List<Products>mproduct;
+    private BottomNavigationView bottomNavigationView;
+
+    private View notificationBadge;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +47,7 @@ public class Home extends AppCompatActivity {
 
 
 
-        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom);
+        bottomNavigationView=findViewById(R.id.bottom);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         loadFragment(new HomeFragment());
@@ -56,6 +70,25 @@ public class Home extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser= FirebaseAuth.getInstance().getCurrentUser();
+//        TextView emailuser=findViewById(R.id.useremaill);
+//
+//        emailuser.setText(currentUser.getEmail());
+
+        if(currentUser == null){
+            Intent i= new Intent(Home.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+        else {
+
+        }
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         Intent i= new Intent(this,MainActivity.class);
@@ -74,12 +107,15 @@ public class Home extends AppCompatActivity {
                     loadFragment(selected_Fragment);
                     return true;
                 case R.id.navigation_categories:
+//                    addBadgeView();
                     selected_Fragment=new CategoriesFragment();
                     loadFragment(selected_Fragment);
 
                     return true;
 
                 case R.id.navigation_cart:
+//                    refreshBadgeView();
+
                     selected_Fragment=new CartFragment();
                     loadFragment(selected_Fragment);
 
@@ -105,5 +141,17 @@ public class Home extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
     }
+    private void addBadgeView() {
+        BottomNavigationMenuView menuView = (BottomNavigationMenuView) bottomNavigationView.getChildAt(0);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) menuView.getChildAt(2);
 
+        notificationBadge = LayoutInflater.from(this).inflate(R.layout.view_notification_badge, menuView, false);
+
+        itemView.addView(notificationBadge);
+    }
+    private void refreshBadgeView() {
+        boolean badgeIsVisible = notificationBadge.getVisibility() != VISIBLE;
+        notificationBadge.setVisibility(badgeIsVisible ? VISIBLE : GONE);
+//        button.setText(badgeIsVisible ? "Hide badge" : " Show badge");
+    }
 }

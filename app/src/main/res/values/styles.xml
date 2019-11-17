@@ -15,4 +15,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+        <style name="HeaderBar">
+            <item name="android:background">#ffffff</item>
+        </style>
+
+    <style name="popupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:popupBackground">#ffffff</item>
+        <item name="android:popupMenuStyle"></item>
+    </style>
+
 </resources>

@@ -120,16 +120,21 @@ mProgressBar=findViewById(R.id.progress_bar);
         uploadproduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
+
 //                    uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
 
                     Toast.makeText(AdminActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
 //                    uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
 
-                    uploadFile();
+                    uploadFile(child);
+
 
                 }
+
+                mProgressBar.setVisibility(View.INVISIBLE);
 //                buttonState++;
 
             }
@@ -171,7 +176,7 @@ mProgressBar=findViewById(R.id.progress_bar);
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    private void uploadFile() {
+    private void uploadFile(final String Pro) {
         if (mImageUri != null) {
 
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
@@ -183,6 +188,7 @@ mProgressBar=findViewById(R.id.progress_bar);
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            mProgressBar.setVisibility(View.VISIBLE);
                             Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
 
 
@@ -197,11 +203,19 @@ mProgressBar=findViewById(R.id.progress_bar);
                             Toast.makeText(AdminActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                             while (!uriTask.isSuccessful()) ;
                             Uri downloadUri = uriTask.getResult();
-                            Products upload = new Products(product_brand.getText().toString().trim(), prductdesc.getText().toString().trim(), product_price.getText().toString().trim(), product_rating.getText().toString().trim(),
-                                    downloadUri.toString());
+
                             String uploadId = mDatabaseRef.push().getKey();
 
+                            Products upload = new Products(Pro,uploadId,product_brand.getText().toString().trim(), prductdesc.getText().toString().trim(), product_price.getText().toString().trim(), product_rating.getText().toString().trim(),
+                                    downloadUri.toString());
+                           Log.d("pro ","proo :"+Pro);
+
                             mDatabaseRef.child(uploadId).setValue(upload);
+
+                            Intent i = new Intent(AdminActivity.this, AdminActivity.class);
+                            startActivity(i);
+                            finish();
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -209,26 +223,26 @@ mProgressBar=findViewById(R.id.progress_bar);
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(AdminActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                    })
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                            mProgressBar.setProgress((int) progress);
-uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-
-
-                        }
-
-
                     });
+//                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+//                        @Override
+//                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+//                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+//                            mProgressBar.setProgress((int) progress);
+//uploadproduct.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+//
+//
+//                        }
+
+
+//                    });
 
 
 
         } else {
             Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
         }
-
+        mProgressBar.setVisibility(View.INVISIBLE);
     }
 
 

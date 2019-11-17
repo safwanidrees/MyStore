@@ -1,32 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_top"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
+        android:minHeight="?attr/actionBarSize"
         >
-        <ImageButton
-            android:id="@+id/back_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backbutton"
-            android:background="#00000000"
-            />
+
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cart"
-            android:textSize="22sp"
-            android:textColor="#000000"
-            android:fontFamily="sans-serif-black"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
+            android:fontFamily="sans-serif-black"
+            android:text="Cart"
+            android:textColor="#000000"
+            android:textSize="22sp" />
 
 
     </androidx.appcompat.widget.Toolbar>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/texttt"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/confirm_order"
+      android:paddingRight="10dp"
+       >
+        <TextView
+
+
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="Total: "
+            android:textSize="24sp"
+
+            android:textStyle="bold"
+            android:textColor="#ff0000"/>
+        <TextView
+
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:text="1000"
+            android:textSize="24sp"
+
+            android:textStyle="bold"
+            android:textColor="#ff0000"/>
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/toolbar_top"
+        android:id="@+id/cartlist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+      android:layout_above="@+id/texttt"/>
+
+
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/confirm_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="55dp"
+        android:background="@drawable/sign_up"
+
+        android:text="Confirm"
+        android:textColor="#ffff" />
+
+</RelativeLayout>

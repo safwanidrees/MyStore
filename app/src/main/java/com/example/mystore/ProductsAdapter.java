@@ -30,6 +30,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     public interface  OnItemClickListener{
         void onItemClick(int positon);
     }
+
     public void setOnItemClickListener(OnItemClickListener listener){
         mListener=listener;
 
@@ -39,8 +40,6 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
     public ProductsAdapter(Context context, List<Products> products) {
         this.context = context;
         this.products = products;
-
-
     }
 
 
@@ -65,7 +64,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.MyView
 
         holder.description.setText(products.get(position).getDescription());
 
-        holder.price.setText(products.get(position).getPrice());
+        holder.price.setText("Rs."+products.get(position).getPrice());
         holder.ratings.setText(products.get(position).getRating());
 
 //Picasso.get().load(products.get(position).getThumbnail()).fit().centerCrop().into(holder.image);

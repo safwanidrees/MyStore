@@ -1,7 +1,8 @@
 package com.example.mystore;
 
 public class Products {
-
+    private String Product;
+private String DetailID;
     private String Brand;
     private String Description;
 
@@ -15,12 +16,30 @@ public class Products {
     public Products() {
     }
 
-    public Products(String brand, String description, String price, String rating, String thumbnail) {
+    public Products(String product, String detailID, String brand, String description, String price, String rating, String thumbnail) {
+        Product = product;
+        DetailID = detailID;
         Brand = brand;
         Description = description;
         Price = price;
         Rating = rating;
         Thumbnail = thumbnail;
+    }
+
+    public void setProduct(String product) {
+        Product = product;
+    }
+
+    public String getProduct() {
+        return Product;
+    }
+
+    public void setDetailID(String detailID) {
+        DetailID = detailID;
+    }
+
+    public String getDetailID() {
+        return DetailID;
     }
 
     public void setThumbnail(String thumbnail) {

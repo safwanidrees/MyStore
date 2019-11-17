@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_top"
@@ -9,17 +11,16 @@
         android:minHeight="?attr/actionBarSize"
         android:background="#ffffff"
         >
-        <ImageButton
-            android:id="@+id/back_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/backbutton"
-            android:background="#00000000"
-            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Profile"
             android:textSize="22sp"
             android:textColor="#000000"
@@ -27,6 +28,17 @@
             android:layout_gravity="center"
             android:id="@+id/toolbar_title" />
 
+            <ImageButton
+                android:id="@+id/menubtn"
+                android:layout_width="30dp"
+
+                android:layout_height="53dp"
+                android:background="#00000000"
+                android:paddingRight="7dp"
+                android:src="@drawable/menu_icon" />
+
+        </LinearLayout>
 
     </androidx.appcompat.widget.Toolbar>
+
 </LinearLayout>

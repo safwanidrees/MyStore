@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignupActivity"
+    android:padding="20dp"
+    android:background="#ffffff">
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Create a new Account"
+        android:textSize="25sp"
+        android:textColor="#000000"
+
+        android:layout_marginTop="30dp"
+
+        />
+    <EditText
+        android:id="@+id/signupemail"
+        android:layout_below="@+id/create"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="110dp"
+        android:layout_height="55dp"
+
+        android:background="@drawable/pro"
+        android:hint="Email"
+
+        />
+    <EditText
+
+        android:layout_below="@+id/signupemail"
+        android:id="@+id/signuppassword"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="55dp"
+android:inputType="textPassword"
+        android:background="@drawable/pro"
+        android:hint="Password"
+
+        />
+    <EditText
+
+        android:layout_below="@+id/signuppassword"
+        android:id="@+id/confirmpassword"
+        android:layout_width="match_parent"
+        android:paddingLeft="10dp"
+        android:inputType="textPassword"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="55dp"
+
+        android:background="@drawable/pro"
+        android:hint="Retype Password"
+
+        />
+    <Button
+        android:id="@+id/create_account"
+        android:layout_width="300dp"
+        android:layout_height="61dp"
+        android:layout_below="@+id/confirmpassword"
+
+        android:layout_centerInParent="true"
+        android:background="@drawable/sign_up"
+
+        android:textSize="18sp"
+        android:textStyle="normal"
+        android:textColor="#FFFFFF"
+        android:text="SignUp"
+        android:fitsSystemWindows="true"/>
+    <Button
+        android:id="@+id/loginback"
+        android:layout_width="300dp"
+        android:layout_height="61dp"
+        android:layout_alignBottom="@+id/create_account"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="-82dp"
+        android:textAllCaps="false"
+        android:background="@drawable/login"
+        android:text="Already have an account? Login in"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="normal"/>
+
+
+</RelativeLayout>

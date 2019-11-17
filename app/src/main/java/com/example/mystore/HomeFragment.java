@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +22,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements ProductsAdapter.OnItemClickListener {
+    ProgressBar mprogress;
     DatabaseReference reference;
     RecyclerView mobile_products;
     ArrayList<Products> list = new ArrayList<Products>();
@@ -35,20 +39,15 @@ private View view;
     ImageButton back;
     RecyclerView mRecyclerView;
     List<Products> mproduct;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
          view= inflater.inflate(R.layout.fragment_home, container, false);
 
-                ImageButton  back=(ImageButton) view.findViewById(R.id.back_Button);
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+         mprogress=view.findViewById(R.id.progresshome);
 
-               onBackPressed();
-            }
-        });
 
 //        mproduct=new ArrayList<>();
 //
@@ -65,6 +64,7 @@ private View view;
 //        mRecyclerView.setLayoutManager(layoutManager);
 //
 //        mRecyclerView.setAdapter(productsAdapter);
+
         RetrieveAllData();
 
 
@@ -72,10 +72,11 @@ private View view;
 return view;
     }
     private void RetrieveAllData() {
+
         child = "Mobiles";
 
-        AllData("Mobiles");
-//list.clear();
+        AllData(child);
+
         child = "Headphones";
         AllData(child);
 
@@ -91,25 +92,30 @@ return view;
     }
 
     private void AllData(String child) {
+
         list=new ArrayList<>();
 
+        mprogress.setVisibility(View.VISIBLE);
 
         mobile_products=view.findViewById(R.id.products);
 //        LinearLayoutManager layoutManager= new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL, false);
         mobile_products.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
-        reference= FirebaseDatabase.getInstance().getReference("Products").child(child);
+        reference= FirebaseDatabase.getInstance().getReference("Products");
+        Query lastQuery = reference.child(child).orderByKey().limitToLast(3);
 
-        reference.addValueEventListener(new ValueEventListener() {
+
+        lastQuery.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 list.clone();
-//
+
 //                productsAdapter.notifyDataSetChanged();
 //                productsAdapter.notifyDataSetChanged();
 
                 for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
 
-
+//
 //Mydoes is use because of arraylist name
 
                     Products p = dataSnapshot1.getValue(Products.class);
@@ -121,25 +127,49 @@ return view;
                 productsAdapter = new ProductsAdapter(getContext(), list);
                 productsAdapter.notifyDataSetChanged();
                 mobile_products.setAdapter(productsAdapter);
+                productsAdapter.setOnItemClickListener(HomeFragment.this);
+                mprogress.setVisibility(View.INVISIBLE);
+
+
 
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
 
-        });
-    }
+        }
 
-    public void onBackPressed() {
-        Intent myIntent = new Intent(getContext(), MainActivity.class);
-
-        myIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(myIntent);
-
-        return;
+        );
     }
 
 
+    @Override
+    public void onItemClick(int positon) {
+
+
+
+        Products order = list.get(positon);
+
+
+        String a=  order.getDetailID();
+        String b= order.getProduct();
+        Toast.makeText(getContext(),"id :"+b,Toast.LENGTH_LONG).show();
+showdata(order.getProduct(),order.getDetailID(),order.getBrand(),order.getDescription(),order.getPrice(),order.getRating(),order.getThumbnail());
+
+    }
+
+    public void showdata(String Product,String DetailId,String brand, String description, String price, String rating, String thumbnail) {
+
+        Intent i= new Intent(getContext(), Product_Details.class);
+        i.putExtra("Product",Product);
+        i.putExtra("ID",DetailId);
+        startActivity(i);
+
+
+
+
+    }
 }
